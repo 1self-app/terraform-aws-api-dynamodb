@@ -9,25 +9,25 @@ variable "http_method" {}
 variable "table_arn" {}
 
 variable "authorization" {
-  default     = "NONE"
+  default = "NONE"
 }
 
 variable "method_request_parameters" {
-  type        = map
-  default     = {}
+  type    = map
+  default = {}
 }
 
 variable "integration_request_parameters" {
-  type        = map
-  default     = {}
+  type    = map
+  default = {}
 }
 
 variable "request_templates" {
-  type        = map
-  default     = {}
+  type    = map
+  default = {}
 }
 
 variable "responses" {
-  type        = list
-  default     = []
+  type    = list
+  default = []
 }
