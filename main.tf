@@ -11,7 +11,7 @@ module "dynamodb_integration" {
 
   integration_http_method = "POST"
   type                    = "AWS"
-  uri                     = "arn:aws:apigateway:eu-west-1:dynamodb:action/PutItem"
+  uri                     = "${format("arn:aws:apigateway:%s:dynamodb:action/PutItem",var.region)}"
   credentials             = aws_iam_role.dynamodb_put.arn
   request_templates       = var.request_templates
 
