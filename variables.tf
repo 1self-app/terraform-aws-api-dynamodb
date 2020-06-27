@@ -8,6 +8,8 @@ variable "http_method" {}
 
 variable "table_arn" {}
 
+variable "region" {}
+
 variable "authorization" {
   default = "NONE"
 }
