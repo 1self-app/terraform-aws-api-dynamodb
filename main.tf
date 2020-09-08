@@ -1,17 +1,18 @@
 module "dynamodb_integration" {
-  source = "github.com/barneyparker/terraform-aws-api-generic"
+  source = "github.com/1self-io/terraform-aws-api-generic"
 
   name                           = var.name
   api_id                         = var.api_id
   resource_id                    = var.resource_id
   http_method                    = var.http_method
   authorization                  = var.authorization
+  authorizer_id                  = var.authorizer_id
   method_request_parameters      = var.method_request_parameters
   integration_request_parameters = var.integration_request_parameters
 
   integration_http_method = "POST"
   type                    = "AWS"
-  uri                     = "${format("arn:aws:apigateway:%s:dynamodb:action/PutItem",var.region)}"
+  uri                     = "${format("arn:aws:apigateway:%s:dynamodb:action/PutItem", var.region)}"
   credentials             = aws_iam_role.dynamodb_put.arn
   request_templates       = var.request_templates
 
