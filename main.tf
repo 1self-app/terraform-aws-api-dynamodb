@@ -12,15 +12,15 @@ module "dynamodb_integration" {
 
   integration_http_method = "POST"
   type                    = "AWS"
-  uri                     = "${format("arn:aws:apigateway:%s:dynamodb:action/PutItem", var.region)}"
-  credentials             = aws_iam_role.dynamodb_put.arn
+  uri                     = "${format("arn:aws:apigateway:%s:dynamodb:action/%s", var.region, var.action)}"
+  credentials             = aws_iam_role.this.arn
   request_templates       = var.request_templates
 
   responses = var.responses
 }
 
-resource "aws_iam_role" "dynamodb_put" {
-  name               = "${var.name}-ddb-put"
+resource "aws_iam_role" "this" {
+  name               = "${var.name}-ddb-${var.action}"
   assume_role_policy = data.aws_iam_policy_document.apigw.json
 }
 
@@ -37,16 +37,16 @@ data "aws_iam_policy_document" "apigw" {
   }
 }
 
-resource "aws_iam_role_policy" "dynamodb_put" {
-  name   = "DynamoDB-Put-Item"
-  role   = aws_iam_role.dynamodb_put.id
-  policy = data.aws_iam_policy_document.dynamodb_put.json
+resource "aws_iam_role_policy" "this" {
+  name   = "${var.name}-DynamoDB-${var.action}"
+  role   = aws_iam_role.this.id
+  policy = data.aws_iam_policy_document.this.json
 }
 
-data "aws_iam_policy_document" "dynamodb_put" {
+data "aws_iam_policy_document" "this" {
   statement {
     actions = [
-      "dynamodb:PutItem",
+      "dynamodb:${var.action}",
     ]
 
     resources = [

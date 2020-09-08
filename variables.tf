@@ -38,3 +38,12 @@ variable "authorizer_id" {
   default     = null
   description = "The authorizer id to be used when the authorization is `CUSTOM` or `COGNITO_USER_POOLS`"
 }
+variable "integration_http_method" {
+  default     = null
+  description = "The integration HTTP method (`GET`, `POST`, `PUT`, `DELETE`, `HEAD`, `OPTIONS`, `ANY`, `PATCH`) specifying how API Gateway will interact with the back end"
+}
+
+variable "action" {
+  default     = null
+  description = "The integration backeng action method. E.g for DynamoDB `Query`,`PutItem`"
+}
