@@ -43,7 +43,7 @@ variable "integration_http_method" {
   description = "The integration HTTP method (`GET`, `POST`, `PUT`, `DELETE`, `HEAD`, `OPTIONS`, `ANY`, `PATCH`) specifying how API Gateway will interact with the back end"
 }
 
-variable "action" {
-  default     = null
+variable "integration_action" {
+  default     = "Query"
   description = "The integration backeng action method. E.g for DynamoDB `Query`,`PutItem`"
 }

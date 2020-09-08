@@ -12,7 +12,7 @@ module "dynamodb_integration" {
 
   integration_http_method = "POST"
   type                    = "AWS"
-  uri                     = "${format("arn:aws:apigateway:%s:dynamodb:action/%s", var.region, var.action)}"
+  uri                     = "${format("arn:aws:apigateway:%s:dynamodb:action/%s", var.region, var.integration_action)}"
   credentials             = aws_iam_role.this.arn
   request_templates       = var.request_templates
 
@@ -20,7 +20,7 @@ module "dynamodb_integration" {
 }
 
 resource "aws_iam_role" "this" {
-  name               = "${var.name}-ddb-${var.action}"
+  name               = "${var.name}-ddb-${var.integration_action}"
   assume_role_policy = data.aws_iam_policy_document.apigw.json
 }
 
@@ -38,7 +38,7 @@ data "aws_iam_policy_document" "apigw" {
 }
 
 resource "aws_iam_role_policy" "this" {
-  name   = "${var.name}-DynamoDB-${var.action}"
+  name   = "${var.name}-DynamoDB-${var.integration_action}"
   role   = aws_iam_role.this.id
   policy = data.aws_iam_policy_document.this.json
 }
@@ -46,7 +46,7 @@ resource "aws_iam_role_policy" "this" {
 data "aws_iam_policy_document" "this" {
   statement {
     actions = [
-      "dynamodb:${var.action}",
+      "dynamodb:${var.integration_action}",
     ]
 
     resources = [
