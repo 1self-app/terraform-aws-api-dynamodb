@@ -33,3 +33,8 @@ variable "responses" {
   type    = list
   default = []
 }
+
+variable "authorizer_id" {
+  default     = null
+  description = "The authorizer id to be used when the authorization is `CUSTOM` or `COGNITO_USER_POOLS`"
+}
