@@ -51,7 +51,7 @@ data "aws_iam_policy_document" "this" {
 
     resources = [
       "${var.table_arn}",
-      "${var.table_arm}/index/*"
+      "${var.table_arn}/index/*"
     ]
   }
 }
