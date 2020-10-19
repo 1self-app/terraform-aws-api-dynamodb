@@ -12,7 +12,7 @@ module "dynamodb_integration" {
 
   integration_http_method = "POST"
   type                    = "AWS"
-  uri                     = "${format("arn:aws:apigateway:%s:dynamodb:action/%s", var.region, var.integration_action)}"
+  uri                     = format("arn:aws:apigateway:%s:dynamodb:action/%s", var.region, var.integration_action)
   credentials             = aws_iam_role.this.arn
   request_templates       = var.request_templates
 
@@ -50,7 +50,7 @@ data "aws_iam_policy_document" "this" {
     ]
 
     resources = [
-      "${var.table_arn}",
+      var.table_arn,
       "${var.table_arn}/index/*"
     ]
   }
